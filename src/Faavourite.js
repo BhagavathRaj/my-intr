@@ -1,10 +1,10 @@
 import React from 'react';
 
-function Favourite() {
+function Favourite({captcha}) {
   return <div>favourite
 
 <center>
-  <h1>Welcome...</h1>
+  <h1>Welcome... {captcha} </h1>
 </center>
 
   </div>;

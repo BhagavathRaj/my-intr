@@ -5,6 +5,7 @@ import Alert from '@mui/material/Alert';
 import { Refresh } from '@material-ui/icons';
 import { useNavigate } from 'react-router';
 import './stylesheet.css'
+import Favourite from './Faavourite';
 
 
 function SinglePage() {
@@ -16,15 +17,20 @@ function SinglePage() {
   const navigate=useNavigate();
 
   const refreshString = () => {
-    setCaptcha(Math.random().toString(36).slice(8));
+    const alphanumericChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let captcha = '';
+    for (let i = 0; i < 6; i++) {
+      captcha += alphanumericChars.charAt(Math.floor(Math.random() * alphanumericChars.length));
+    }
+    setCaptcha(captcha);
   };
-
   const matchCaptcha = (event) => {
     event.preventDefault();
     if (text === captcha) {
       setValid(false);
       setSuccess(true);
-      navigate('/txt')
+      navigate('/txt', <Favourite captcha={captcha}/>)
+      
     } else {
       setValid(true);
       setSuccess(false);
@@ -65,6 +71,7 @@ function SinglePage() {
           </form>
         </CardContent>
       </div>
+     
     </div>
   );
 }
